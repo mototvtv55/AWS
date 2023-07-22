@@ -1,11 +1,23 @@
-FROM jenkins/jenkins
-USER root
-RUN apt-get update && apt-get install -g docker-ce-cli
-RUN apt-get update && apt-get install -g lsb-release
-RUN echo "deb [arch=$(dpkg --print-architecture) \
-  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
-  https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
-  https://download.docker.com/linux/debian/gpg
-USER jenkins
+# Base image
+FROM ubuntu:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file
+COPY InstallJenkins.sh .
+
+# Install the project dependencies
+RUN chmod +x InstallJenkins.sh
+RUN ./InstallJenkins.sh
+
+# Copy the application code into the container
+COPY . .
+
+# Expose the port the Flask application will be listening on
+EXPOSE 8080
+
+# Set environment variables, if necessary
+# ENV MY_ENV_VAR=value
+
+# Run the Jenkins App application
