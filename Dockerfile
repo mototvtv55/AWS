@@ -11,7 +11,7 @@ COPY InstallJenkins.sh
 RUN chmod +x InstallJenkins.sh
 
 # Copy the application code into the container
-COPY . .
+COPY --chown=node:node . .
 
 # Expose the port the Flask application will be listening on
 EXPOSE 8080
