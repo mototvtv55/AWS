@@ -5,11 +5,10 @@ FROM ubuntu:latest
 WORKDIR /app
 
 # Copy the requirements file
-COPY InstallJenkins.sh .
+COPY InstallJenkins.sh
 
 # Install the project dependencies
 RUN chmod +x InstallJenkins.sh
-RUN ./InstallJenkins.sh
 
 # Copy the application code into the container
 COPY . .
