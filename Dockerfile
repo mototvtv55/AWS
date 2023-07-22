@@ -1,7 +1,7 @@
 FROM jenkins/jenkins
 USER root
-RUN sudo  apt-get -y update && apt-get install -g docker-ce-cli
-RUN sudo  apt-get -y update && apt-get install -g lsb-release
+RUN apt-get update && apt-get install -g docker-ce-cli
+RUN apt-get update && apt-get install -g lsb-release
 RUN echo "deb [arch=$(dpkg --print-architecture) \
   signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
   https://download.docker.com/linux/debian \
