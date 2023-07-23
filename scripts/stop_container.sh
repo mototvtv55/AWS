@@ -2,4 +2,4 @@
 set -e
 
 # Stop the running container (if any)
-echo "Hi"
+docker stop -p 8080:8080 --name=jenkins-master -d jenkins
